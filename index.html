@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Save the Coral Reefs | Nhóm 68 - ULIS</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome cho Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Chart.js cho Biểu đồ -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            ocean: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              800: '#075985',
+              900: '#0c4a6e',
+            },
+            coral: '#ff7f50'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .hero-bg {
+      background-image: linear-gradient(rgba(12, 74, 110, 0.7), rgba(12, 74, 110, 0.7)), url('https://images.unsplash.com/photo-1546026423-cc4642628d2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #0ea5e9;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+
+    /* Hide default details marker */
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details summary::marker {
+      display: none;
+      content: '';
+    }
+  </style>
+</head>
+
+<body class="font-sans text-gray-800 antialiased bg-slate-50">
+
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex-shrink-0 flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+          <i class="fa-solid fa-water text-ocean-600 text-2xl"></i>
+          <span class="font-bold text-xl text-ocean-900">ReefRescue</span>
+        </div>
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-8 items-center">
+          <a href="#about" class="text-gray-600 hover:text-ocean-600 font-medium transition">Về dự án</a>
+          <a href="#crisis" class="text-gray-600 hover:text-ocean-600 font-medium transition">Thực trạng</a>
+          <a href="#education" class="text-gray-600 hover:text-ocean-600 font-medium transition">Kiến thức</a>
+          <a href="#benefits" class="text-gray-600 hover:text-ocean-600 font-medium transition">Lợi ích</a>
+          <a href="#team" class="text-gray-600 hover:text-ocean-600 font-medium transition">Đội ngũ</a>
+          <a href="#action"
+            class="bg-ocean-600 text-white px-5 py-2 rounded-full font-medium hover:bg-ocean-700 transition shadow-lg hover:shadow-ocean-500/30">Tham
+            gia ngay</a>
+        </div>
+        <!-- Mobile menu button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-gray-600 hover:text-ocean-600 focus:outline-none">
+            <i class="fa-solid fa-bars text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu Panel -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+      <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <a href="#about" class="block px-3 py-2 text-gray-700 font-medium hover:bg-ocean-50 rounded-md">Về dự án</a>
+        <a href="#crisis" class="block px-3 py-2 text-gray-700 font-medium hover:bg-ocean-50 rounded-md">Thực trạng</a>
+        <a href="#education" class="block px-3 py-2 text-gray-700 font-medium hover:bg-ocean-50 rounded-md">Kiến
+          thức</a>
+        <a href="#benefits" class="block px-3 py-2 text-gray-700 font-medium hover:bg-ocean-50 rounded-md">Lợi ích</a>
+        <a href="#team" class="block px-3 py-2 text-gray-700 font-medium hover:bg-ocean-50 rounded-md">Đội ngũ</a>
+        <a href="#action" class="block px-3 py-2 text-ocean-600 font-bold hover:bg-ocean-50 rounded-md">Tham gia
+          ngay</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- FR-1: Hero Section -->
+  <section class="hero-bg min-h-screen flex items-center justify-center pt-16">
+    <div class="text-center px-4 max-w-4xl mx-auto">
+      <span
+        class="inline-block py-1 px-3 rounded-full bg-ocean-500/20 text-ocean-100 border border-ocean-400/30 text-sm font-semibold tracking-wider mb-6 animate-pulse">
+        DỰ ÁN BẢO VỆ MÔI TRƯỜNG BIỂN
+      </span>
+      <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 leading-tight drop-shadow-lg">
+        Save the <span class="text-coral">Coral Reefs</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-ocean-50 mb-10 font-light drop-shadow-md">
+        San hô đang chết dần. Trái đất đang kêu cứu.<br class="hidden md:block"> Hành động của bạn hôm nay quyết định
+        đại dương của ngày mai.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="#action"
+          class="bg-coral hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(255,127,80,0.4)]">
+          Hành động ngay <i class="fa-solid fa-arrow-right ml-2"></i>
+        </a>
+        <a href="#about"
+          class="bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white border border-white/50 font-bold py-4 px-8 rounded-full transition duration-300">
+          Tìm hiểu thêm
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FR-2: Về dự án -->
+  <section id="about" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1582967788606-a171c1080cb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Coral Reef" class="rounded-2xl shadow-2xl object-cover h-96 w-full">
+
+        </div>
+        <div>
+          <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-6">“Save the Coral Reefs” - Chung tay cứu lấy rạn
+            san hô
+          </h2>
+          <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+            Giải pháp nâng cao nhận thức và hành động bảo vệ hệ sinh thái biển, đặc biệt là các rạn san hô đang bị đe
+            dọa nghiêm trọng.
+
+          </p>
+          <!-- Collapsible Sections -->
+          <div class="space-y-3 mb-8">
+            <!-- 01. Giới thiệu -->
+            <details class="group bg-ocean-50 rounded-xl border border-ocean-100 overflow-hidden">
+              <summary
+                class="flex items-center gap-3 px-5 py-4 cursor-pointer list-none font-semibold text-ocean-900 hover:bg-ocean-100 transition select-none">
+                <span
+                  class="w-8 h-8 bg-ocean-600 text-white rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0">01</span>
+                <span class="flex-1">Giới thiệu</span>
+                <i
+                  class="fa-solid fa-chevron-down text-ocean-400 text-sm transition-transform duration-300 group-open:rotate-180"></i>
+              </summary>
+              <div class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-ocean-100 pt-4">
+                Rạn san hô được ví như "rừng nhiệt đới dưới đáy đại dương", đóng vai trò quan trọng trong việc duy trì
+                đa dạng sinh học và bảo vệ môi trường biển. Tuy nhiên, hiện nay san hô đang bị suy thoái nghiêm trọng
+                do biến đổi khí hậu, ô nhiễm nước, và hoạt động khai thác thiếu bền vững. Dự án <strong>"Save the Coral
+                  Reefs"</strong> ra đời nhằm nâng cao nhận thức cộng đồng và kêu gọi hành động thiết thực để bảo vệ hệ
+                sinh thái quý giá này.
+              </div>
+            </details>
+
+            <!-- 02. Tại sao chọn chúng tôi -->
+            <details class="group bg-ocean-50 rounded-xl border border-ocean-100 overflow-hidden">
+              <summary
+                class="flex items-center gap-3 px-5 py-4 cursor-pointer list-none font-semibold text-ocean-900 hover:bg-ocean-100 transition select-none">
+                <span
+                  class="w-8 h-8 bg-ocean-600 text-white rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0">02</span>
+                <span class="flex-1">Tại sao chọn chúng tôi</span>
+                <i
+                  class="fa-solid fa-chevron-down text-ocean-400 text-sm transition-transform duration-300 group-open:rotate-180"></i>
+              </summary>
+              <div class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-ocean-100 pt-4">
+                <p class="mb-3">Dự án kết hợp giữa giáo dục, công nghệ và hoạt động thực tiễn nhằm tạo ra tác động
+                  tích cực:</p>
+                <ul class="list-disc ml-5 space-y-1 mb-3">
+                  <li>Tổ chức các chiến dịch truyền thông nâng cao nhận thức về bảo vệ san hô</li>
+                  <li>Ứng dụng công nghệ để theo dõi và phục hồi rạn san hô</li>
+                  <li>Kết nối cộng đồng, tình nguyện viên và các tổ chức môi trường</li>
+                </ul>
+                <p>Chúng tôi hướng đến việc biến mỗi cá nhân trở thành một <strong>"người bảo vệ đại dương"</strong>,
+                  góp phần nhỏ nhưng ý nghĩa cho hành tinh xanh.</p>
+              </div>
+            </details>
+
+            <!-- 03. Tầm nhìn -->
+            <details class="group bg-ocean-50 rounded-xl border border-ocean-100 overflow-hidden">
+              <summary
+                class="flex items-center gap-3 px-5 py-4 cursor-pointer list-none font-semibold text-ocean-900 hover:bg-ocean-100 transition select-none">
+                <span
+                  class="w-8 h-8 bg-ocean-600 text-white rounded-lg flex items-center justify-center text-sm font-bold flex-shrink-0">03</span>
+                <span class="flex-1">Tầm nhìn</span>
+                <i
+                  class="fa-solid fa-chevron-down text-ocean-400 text-sm transition-transform duration-300 group-open:rotate-180"></i>
+              </summary>
+              <div class="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-ocean-100 pt-4">
+                "Save the Coral Reefs" hướng tới một tương lai nơi các rạn san hô được phục hồi và phát triển bền vững.
+                Dự án mong muốn xây dựng một cộng đồng có ý thức bảo vệ môi trường biển, giảm thiểu tác động tiêu cực
+                từ con người và lan tỏa thông điệp <strong>sống xanh – sống có trách nhiệm</strong> với thiên nhiên.
+              </div>
+            </details>
+          </div>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="flex items-start gap-4">
+              <div class="bg-ocean-100 p-3 rounded-lg text-ocean-600">
+                <i class="fa-solid fa-bullhorn text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Giáo dục</h4>
+                <p class="text-sm text-gray-500">Lan tỏa kiến thức</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="bg-coral/20 p-3 rounded-lg text-coral">
+                <i class="fa-solid fa-hands-holding-circle text-xl"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-gray-900">Hành động</h4>
+                <p class="text-sm text-gray-500">Tạo thay đổi thực</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FR-3: Thực trạng (San hô đang kêu cứu) -->
+  <section id="crisis" class="py-20 bg-ocean-900 text-white relative overflow-hidden">
+    <!-- Background Decor -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+      <svg class="absolute top-10 left-10 w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold mb-4">Đại Dương Đang Kêu Cứu</h2>
+        <p class="text-ocean-100 max-w-2xl mx-auto">Những con số biết nói về tình trạng suy thoái của rạn san hô toàn
+          cầu.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Stat 1 -->
+        <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 text-center">
+          <div class="text-5xl font-extrabold text-coral mb-4">14%</div>
+          <h3 class="text-xl font-bold mb-2">Đã Biến Mất</h3>
+          <p class="text-ocean-100 text-sm">Khoảng 14% rạn san hô trên thế giới đã bị mất kể từ năm 2009.</p>
+          <p class="text-xs text-white/50 mt-4 italic">Nguồn: GCRMN (2020)</p>
+        </div>
+        <!-- Stat 2 -->
+        <div
+          class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 text-center transform md:-translate-y-4 shadow-2xl">
+          <div class="text-5xl font-extrabold text-red-500 mb-4">50%</div>
+          <h3 class="text-xl font-bold mb-2">Tẩy Trắng & Chết</h3>
+          <p class="text-ocean-100 text-sm">Gần một nửa rạn san hô toàn cầu đã chết trong vòng 30 năm qua do nhiệt độ
+            tăng.</p>
+          <p class="text-xs text-white/50 mt-4 italic">Nguồn: NOAA</p>
+        </div>
+        <!-- Stat 3 -->
+        <div class="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 text-center">
+          <div class="text-5xl font-extrabold text-yellow-400 mb-4">90%</div>
+          <h3 class="text-xl font-bold mb-2">Nguy Cơ Tuyệt Chủng</h3>
+          <p class="text-ocean-100 text-sm">Đến năm 2050, 90% rạn san hô có thể biến mất nếu chúng ta không hành động.
+          </p>
+          <p class="text-xs text-white/50 mt-4 italic">Nguồn: UNEP</p>
+        </div>
+      </div>
+
+      <!-- Before/After Visual (Simulated with images) -->
+      <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-4 rounded-2xl overflow-hidden">
+        <div class="relative">
+          <img
+            src="https://images.unsplash.com/photo-1546026423-cc4642628d2b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+            alt="Healthy Coral" class="w-full h-64 object-cover">
+          <div class="absolute bottom-4 left-4 bg-green-500 text-white px-3 py-1 rounded font-bold text-sm">TRƯỚC ĐÂY:
+            Rực rỡ</div>
+        </div>
+        <div class="relative">
+          <img src="https://lh3.googleusercontent.com/d/1wrJSQ4mMS_jlfCzc83mATQwaL_DWuFxf" alt="Bleached Coral"
+            class="w-full h-64 object-cover">
+          <div class="absolute bottom-4 right-4 bg-red-600 text-white px-3 py-1 rounded font-bold text-sm">HIỆN TẠI: Tẩy
+            trắng</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FR-4: Nguyên nhân & Nhận thức -->
+  <section id="causes" class="py-20 bg-ocean-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- FR-4.1: Nguyên nhân -->
+      <div class="mb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold text-ocean-900 mb-4">Vì Sao San Hô Chết?</h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">Hiểu rõ nguyên nhân là bước đầu tiên để tìm ra giải pháp khắc phục.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Cause 1 -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+            <div
+              class="w-20 h-20 mx-auto bg-red-100 text-red-500 rounded-full flex items-center justify-center text-3xl mb-6">
+              <i class="fa-solid fa-temperature-arrow-up"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Biến Đổi Khí Hậu</h3>
+            <p class="text-gray-600 text-sm">Nhiệt độ nước biển tăng cao gây ra hiện tượng san hô tẩy trắng và chết hàng
+              loạt.</p>
+          </div>
+          <!-- Cause 2 -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+            <div
+              class="w-20 h-20 mx-auto bg-purple-100 text-purple-500 rounded-full flex items-center justify-center text-3xl mb-6">
+              <i class="fa-solid fa-bottle-water"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Ô Nhiễm Đại Dương</h3>
+            <p class="text-gray-600 text-sm">Rác thải nhựa, hóa chất nông nghiệp và nước thải sinh hoạt làm ngạt thở rạn
+              san hô.</p>
+          </div>
+          <!-- Cause 3 -->
+          <div class="bg-white rounded-2xl p-8 shadow-lg card-hover text-center">
+            <div
+              class="w-20 h-20 mx-auto bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-3xl mb-6">
+              <i class="fa-solid fa-anchor"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-3">Du Lịch Thiếu Ý Thức</h3>
+            <p class="text-gray-600 text-sm">Giẫm đạp lên san hô, thả neo sai chỗ hoặc vứt rác trực tiếp xuống biển khi
+              du lịch.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FR-4.2: Khảo sát nhận thức -->
+      <div class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-gray-100">
+        <h3 class="text-2xl font-bold text-center text-ocean-900 mb-8">Góc Nhìn Cộng Đồng (Khảo sát Gen Z)</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h4 class="font-bold text-gray-700 mb-4 text-center">Mức Độ Nhận Thức Về Khủng Hoảng</h4>
+            <div class="w-full max-w-sm mx-auto">
+              <canvas id="awarenessChart"></canvas>
+            </div>
+            <p class="text-sm text-center text-gray-500 mt-4">Hơn 60% giới trẻ chưa nhận thức đầy đủ tính cấp bách.</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-700 mb-4 text-center">Tỷ Lệ Đã Hành Động Bảo Vệ Biển</h4>
+            <div class="w-full max-w-sm mx-auto">
+              <canvas id="actionChart"></canvas>
+            </div>
+            <p class="text-sm text-center text-gray-500 mt-4">Ý định cao nhưng số người thực sự hành động còn hạn chế.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FR-5: Nội dung giáo dục & Tips -->
+  <section id="education" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <!-- FR-5.1: Kiến thức cơ bản -->
+        <div>
+          <h2 class="text-3xl font-bold text-ocean-900 mb-6">San Hô Là Gì?</h2>
+          <div class="prose prose-lg text-gray-600">
+            <p class="mb-4">
+              Dù trông giống thực vật hoặc đá, <strong>san hô thực chất là ĐỘNG VẬT</strong>. Chúng được tạo thành từ
+              hàng ngàn sinh vật nhỏ bé gọi là polyp.
+            </p>
+            <div class="bg-ocean-50 border-l-4 border-ocean-500 p-4 rounded-r-lg mb-6">
+              <p class="font-semibold text-ocean-800 m-0">Vai trò thiết yếu:</p>
+              <ul class="list-disc ml-5 mt-2 text-sm text-ocean-700 space-y-1">
+                <li>Cung cấp nơi ở cho 25% sinh vật biển (dù chỉ chiếm 1% diện tích).</li>
+                <li>Bảo vệ bờ biển khỏi bão và xói mòn.</li>
+                <li>Cung cấp nguồn thực phẩm và thuốc men cho con người.</li>
+              </ul>
+            </div>
+            <!-- Embedded Video -->
+            <div class="relative rounded-xl overflow-hidden shadow-lg aspect-video mb-4">
+              <iframe src="https://drive.google.com/file/d/1NVIGwNYrCl45Ul86NECSnn4cBLaDXMFC/preview"
+                class="absolute inset-0 w-full h-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <p class="text-xs text-center text-gray-500 mb-6">
+              <i class="fa-solid fa-circle-info mr-1"></i>
+              Nếu video không hiển thị trên điện thoại, hãy <a
+                href="https://drive.google.com/file/d/1NVIGwNYrCl45Ul86NECSnn4cBLaDXMFC/view" target="_blank"
+                class="text-ocean-600 font-bold underline decoration-ocean-200 hover:decoration-ocean-600 transition-all">bấm
+                vào đây để xem trên Drive</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- FR-5.2: Tips bảo vệ -->
+        <div class="bg-ocean-900 rounded-3xl p-8 md:p-10 text-white shadow-2xl relative overflow-hidden">
+          <div
+            class="absolute top-0 right-0 w-64 h-64 bg-ocean-800 rounded-full -mr-20 -mt-20 opacity-50 pointer-events-none">
+          </div>
+
+          <h2 class="text-3xl font-bold mb-2 relative z-10">Bạn Có Thể Làm Gì?</h2>
+          <p class="text-ocean-200 mb-8 relative z-10">Những hành động nhỏ mỗi ngày tạo nên sự thay đổi lớn.</p>
+
+          <ul class="space-y-6 relative z-10">
+            <li
+              class="flex items-start gap-4 bg-white/10 p-4 rounded-xl border border-white/10 hover:bg-white/20 transition">
+              <div class="bg-coral rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa-solid fa-check text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Giảm rác thải nhựa dùng một lần</h4>
+                <p class="text-sm text-ocean-100">Sử dụng bình nước, túi vải cá nhân để nhựa không trôi ra biển.</p>
+              </div>
+            </li>
+            <li
+              class="flex items-start gap-4 bg-white/10 p-4 rounded-xl border border-white/10 hover:bg-white/20 transition">
+              <div class="bg-coral rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa-solid fa-check text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Không mua sản phẩm từ san hô</h4>
+                <p class="text-sm text-ocean-100">Từ chối trang sức hay đồ lưu niệm làm từ san hô tự nhiên.</p>
+              </div>
+            </li>
+            <li
+              class="flex items-start gap-4 bg-white/10 p-4 rounded-xl border border-white/10 hover:bg-white/20 transition">
+              <div class="bg-coral rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa-solid fa-check text-white text-sm"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg">Du lịch biển có ý thức</h4>
+                <p class="text-sm text-ocean-100">Dùng kem chống nắng an toàn cho san hô (Reef-safe), không giẫm đạp khi
+                  lặn.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-ocean-900 mb-6">Lợi ích khi tham gia cùng chúng mình</h2>
+        <p class="text-lg text-gray-600 max-w-3xl mx-auto italic">
+          “Bạn không cần phải là chuyên gia môi trường để tạo ra sự khác biệt. Chỉ với một quyết định tham gia, bạn
+          không chỉ góp phần bảo vệ những rạn san hô đang dần biến mất mà còn mở ra cho mình những cơ hội phát triển,
+          trải nghiệm và kết nối đầy giá trị.”
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Benefit 1 -->
+        <div
+          class="group bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-500">
+          <div class="h-56 overflow-hidden">
+            <img src="https://lh3.googleusercontent.com/d/1-Q1aAGMlOIqJm12GgaMyz55NQT3I-gei" alt="Certification"
+              class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          </div>
+          <div class="p-8">
+            <div
+              class="w-14 h-14 bg-ocean-100 text-ocean-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-ocean-600 group-hover:text-white transition-all duration-300">
+              <i class="fa-solid fa-gift"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-ocean-900 mb-4">1. Chứng nhận tình nguyện</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Khi tham gia dự án, bạn sẽ nhận được chứng nhận tình nguyện ghi nhận sự đóng góp của mình trong hoạt động
+              bảo vệ môi trường. Đây là một lợi thế quan trọng giúp bạn làm nổi bật CV, đặc biệt khi xin học bổng, thực
+              tập hoặc tham gia các tổ chức, dự án khác trong tương lai.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div
+          class="group bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-500">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80"
+              alt="Skills" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          </div>
+          <div class="p-8">
+            <div
+              class="w-14 h-14 bg-coral/20 text-coral rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-coral group-hover:text-white transition-all duration-300">
+              <i class="fa-solid fa-rocket"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-ocean-900 mb-4">2. Trải nghiệm thực tế & phát triển kỹ năng</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Bạn sẽ được trực tiếp tham gia vào các hoạt động như dọn rác, truyền thông, tổ chức sự kiện và chiến dịch
+              cộng đồng. Qua đó, bạn có cơ hội rèn luyện các kỹ năng quan trọng như làm việc nhóm, giao tiếp, quản lý
+              thời gian và giải quyết vấn đề — những yếu tố rất cần thiết cho học tập và công việc sau này.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div
+          class="group bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-500">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80"
+              alt="Community" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          </div>
+          <div class="p-8">
+            <div
+              class="w-14 h-14 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-green-600 group-hover:text-white transition-all duration-300">
+              <i class="fa-solid fa-handshake-simple"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-ocean-900 mb-4">3. Kết nối cộng đồng & mở rộng mối quan hệ</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Dự án là môi trường để bạn gặp gỡ và kết nối với những bạn trẻ cùng chí hướng. Bạn sẽ được làm việc trong
+              một cộng đồng năng động, tích cực và có cơ hội xây dựng những mối quan hệ giá trị, hỗ trợ cho học tập,
+              hoạt động xã hội và định hướng tương lai.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div
+          class="group bg-slate-50 rounded-3xl overflow-hidden border border-slate-100 hover:shadow-2xl transition-all duration-500">
+          <div class="h-56 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80"
+              alt="Impact" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+          </div>
+          <div class="p-8">
+            <div
+              class="w-14 h-14 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-yellow-600 group-hover:text-white transition-all duration-300">
+              <i class="fa-solid fa-earth-americas"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-ocean-900 mb-4">4. Góp phần tạo ra tác động tích cực cho môi trường</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Không chỉ dừng lại ở việc nâng cao nhận thức, bạn sẽ trực tiếp góp phần vào các hoạt động bảo vệ môi
+              trường biển và rạn san hô. Mỗi hành động của bạn — dù nhỏ — đều giúp tạo ra sự thay đổi tích cực, và quan
+              trọng hơn, bạn trở thành một phần của giải pháp cho vấn đề môi trường.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-5xl font-bold text-ocean-900 mb-4">Mọi người nói gì về Dự án của chúng tôi</h2>
+        <div class="w-24 h-1 bg-coral mx-auto rounded-full"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex text-yellow-400 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">
+              “Tham gia dự án giúp mình hiểu rõ hơn về vấn đề môi trường biển. Không chỉ học mà còn được trực tiếp tham
+              gia hoạt động rất ý nghĩa.”
+            </p>
+          </div>
+          <div class="flex items-center gap-4 border-t pt-6">
+            <div class="w-12 h-12 bg-ocean-100 rounded-full flex items-center justify-center text-ocean-600 font-bold">
+              NA</div>
+            <div>
+              <h4 class="font-bold text-gray-900">Nguyễn Thị Anh</h4>
+              <p class="text-xs text-gray-500">Sinh viên ULIS</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between transform md:-translate-y-4">
+          <div>
+            <div class="flex text-yellow-400 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">
+              “Mình thích nhất là được tham gia hoạt động thực tế và gặp nhiều bạn cùng chí hướng. Cảm giác mình đang
+              làm điều gì đó có ích.”
+            </p>
+          </div>
+          <div class="flex items-center gap-4 border-t pt-6">
+            <div class="w-12 h-12 bg-coral/20 rounded-full flex items-center justify-center text-coral font-bold">PN
+            </div>
+            <div>
+              <h4 class="font-bold text-gray-900">Phạm Phương Nhi</h4>
+              <p class="text-xs text-gray-500">Tình nguyện viên</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div
+          class="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex text-yellow-400 mb-4">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="text-gray-600 italic mb-6">
+              “Dự án không chỉ nâng cao nhận thức mà còn tạo động lực để mình thay đổi thói quen sống xanh hơn mỗi
+              ngày.”
+            </p>
+          </div>
+          <div class="flex items-center gap-4 border-t pt-6">
+            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold">
+              VP</div>
+            <div>
+              <h4 class="font-bold text-gray-900">Phạm Thị Vi Phương</h4>
+              <p class="text-xs text-gray-500">Sinh viên</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FR-6 & FR-7: Tương tác, Hành động & Share -->
+  <section id="action" class="py-20 bg-ocean-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl md:text-5xl font-bold text-ocean-900 mb-4">500+ Thành Viên - Cùng Chúng Tôi Hành Động</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Chọn cách bạn muốn đóng góp cho dự án.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <!-- FR-6.1 & FR-7.1: Challenge & Social Share -->
+        <div class="bg-gradient-to-br from-ocean-500 to-ocean-700 rounded-3xl p-8 md:p-10 text-white shadow-xl">
+          <div class="inline-block px-4 py-1 bg-white/20 rounded-full text-sm font-bold tracking-wide mb-6">
+            <i class="fa-brands fa-instagram mr-2"></i>TRENDING TIKTOK/IG
+          </div>
+          <h3 class="text-3xl font-bold mb-4">Tham gia <span class="text-yellow-300">#CoralChallenge</span></h3>
+          <p class="text-ocean-100 mb-8">Lan tỏa thông điệp bằng cách chụp ảnh bạn nhặt rác hoặc sử dụng đồ tái chế,
+            đăng lên mạng xã hội với hashtag của dự án.</p>
+
+          <div class="bg-white/10 rounded-xl p-5 mb-8 border border-white/20">
+            <h4 class="font-bold mb-2">3 Bước Đơn Giản:</h4>
+            <ol class="list-decimal ml-5 space-y-2 text-sm text-ocean-50">
+              <li>Chụp một bức ảnh/video hành động xanh của bạn.</li>
+              <li>Copy hashtag bên dưới.</li>
+              <li>Đăng lên MXH và tag 3 người bạn.</li>
+            </ol>
+            <div class="mt-4 flex items-center gap-2 bg-black/20 p-3 rounded-lg">
+              <code class="text-yellow-300 font-bold flex-1">#CoralChallenge #SaveTheReef #Nhom68ULIS</code>
+              <button onclick="copyHashtag()"
+                class="bg-white text-ocean-800 px-3 py-1 rounded text-sm hover:bg-ocean-100 transition" title="Copy">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+            <p id="copy-msg" class="text-green-300 text-xs mt-2 hidden"><i class="fa-solid fa-check"></i> Đã copy!</p>
+          </div>
+
+          <!-- FR-7: Share buttons -->
+          <div>
+            <p class="text-sm font-semibold mb-3">Chia sẻ chiến dịch ngay:</p>
+            <div class="flex gap-4">
+              <a href="https://www.facebook.com/login" target="_blank"
+                class="w-12 h-12 bg-[#1877F2] rounded-full flex items-center justify-center hover:scale-110 transition shadow-lg text-white text-xl">
+                <i class="fa-brands fa-facebook-f"></i>
+              </a>
+              <a href="https://www.instagram.com/accounts/login/" target="_blank"
+                class="w-12 h-12 bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] rounded-full flex items-center justify-center hover:scale-110 transition shadow-lg text-white text-xl">
+                <i class="fa-brands fa-instagram"></i>
+              </a>
+              <a href="https://www.tiktok.com/login" target="_blank"
+                class="w-12 h-12 bg-black rounded-full flex items-center justify-center hover:scale-110 transition shadow-lg text-white text-xl">
+                <i class="fa-brands fa-tiktok"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FR-6.2: Form Tình Nguyện Viên -->
+        <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100">
+          <div
+            class="w-14 h-14 bg-ocean-100 text-ocean-600 rounded-full flex items-center justify-center text-2xl mb-6">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-2">Trở thành người bảo vệ đại dương 🌊</h3>
+          <p class="text-gray-500 mb-8 text-sm">Tham gia các đợt dọn rác bãi biển và chiến dịch tuyên truyền offline
+            cùng Nhóm 68.</p>
+
+          <form id="volunteer-form" onsubmit="submitForm(event)">
+            <div class="mb-5">
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Họ và Tên *</label>
+              <input type="text" id="name" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 transition outline-none"
+                placeholder="Nguyễn Văn A">
+            </div>
+            <div class="mb-6">
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email liên hệ *</label>
+              <input type="email" id="email" required
+                class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 transition outline-none"
+                placeholder="nguyenvana@gmail.com">
+              <p class="text-xs text-gray-400 mt-1">Chúng tôi sẽ gửi thông tin sự kiện qua email này.</p>
+            </div>
+            <button type="submit"
+              class="w-full bg-ocean-600 hover:bg-ocean-700 text-white font-bold py-3 px-4 rounded-xl transition duration-300 shadow-lg flex justify-center items-center gap-2">
+              <span>Gửi Đăng Ký</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+
+          <!-- Success Message (Hidden by default) -->
+          <div id="form-success"
+            class="hidden mt-6 bg-green-50 text-green-700 p-4 rounded-xl border border-green-200 flex items-start gap-3">
+            <i class="fa-solid fa-circle-check text-xl mt-0.5"></i>
+            <div>
+              <h4 class="font-bold">Đăng ký thành công!</h4>
+              <p class="text-sm">Cảm ơn bạn. Nhóm 68 sẽ liên hệ với bạn trong thời gian sớm nhất.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Volunteer Location Map -->
+      <div class="mt-12 bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-gray-100">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-2">
+              <i class="fa-solid fa-map-location-dot text-ocean-600 mr-2"></i>Địa Điểm Tập Kết
+            </h3>
+            <p class="text-gray-500 text-sm">Trường Đại học Ngoại ngữ - Đại học Quốc gia Hà Nội (ULIS)</p>
+          </div>
+          <div class="mt-4 md:mt-0 flex items-center gap-2 bg-green-50 border border-green-200 px-4 py-2 rounded-full">
+            <span class="relative flex h-3 w-3">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+            </span>
+            <span class="text-green-700 text-sm font-bold">Đang mở đăng ký</span>
+          </div>
+        </div>
+
+        <!-- Google Map Iframe -->
+        <div
+          class="w-full h-80 md:h-96 rounded-2xl overflow-hidden border border-gray-100 shadow-inner bg-gray-50 relative group">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.863981039869!2d105.78274537508436!3d21.03813778061355!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b32b85e0c5%3A0x633527b165b430e3!2sTr%C6%B0%E1%BB%9Dng%20%C4%90%E1%BA%A1i%20H%E1%BB%8Dc%20Ngo%E1%BA%A1i%20Ng%E1%BB%AF%20-%20%C4%90HQGHN!5e0!3m2!1svi!2s!4v1714290000000!5m2!1svi!2s"
+            class="absolute inset-0 w-full h-full border-0 transition-all duration-500 ease-in-out" allowfullscreen=""
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+          <!-- Overlay cho Mobile để tránh kẹt cuộn trang -->
+          <div class="absolute inset-0 pointer-events-none rounded-2xl md:hidden border border-gray-100"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <span
+          class="inline-block py-1 px-4 rounded-full bg-ocean-100 text-ocean-600 text-sm font-semibold tracking-wider mb-4">NHÓM
+          68 - ULIS</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-ocean-900 mb-4">Đội Ngũ Dự Án</h2>
+        <p class="text-gray-600 max-w-2xl mx-auto">Những thành viên đứng sau dự án "Save the Coral Reefs" – sẵn sàng
+          kết nối và đồng hành cùng bạn.</p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-6">
+
+        <!-- Member 1 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-ocean-500 to-ocean-600"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-ocean-100 text-ocean-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-ocean-600 group-hover:text-white transition-colors duration-300">
+              VL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Vũ Thị Thảo Linh</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 24040630</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0394789082" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0394789082
+              </a>
+              <a href="mailto:thaolinh130106@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">thaolinh130106@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-coral to-orange-400"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-orange-100 text-coral rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-coral group-hover:text-white transition-colors duration-300">
+              BL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Hoàng Thị Bích Loan</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 24042256</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0374201865" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0374201865
+              </a>
+              <a href="mailto:bichloan5344@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">bichloan5344@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-ocean-500 to-ocean-600"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-ocean-100 text-ocean-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-ocean-600 group-hover:text-white transition-colors duration-300">
+              TL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Hứa Thị Thanh Loan</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 23041083</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0869629585" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0869629585
+              </a>
+              <a href="mailto:thloan2286@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">thloan2286@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-coral to-orange-400"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-orange-100 text-coral rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-coral group-hover:text-white transition-colors duration-300">
+              BL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Phạm Bích Loan</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 24042055</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0344333257" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0344333257
+              </a>
+              <a href="mailto:ploan1802@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">ploan1802@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 5 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-ocean-500 to-ocean-600"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-ocean-100 text-ocean-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-ocean-600 group-hover:text-white transition-colors duration-300">
+              GL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Hoàng Gia Long</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 24040635</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0916564289" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0916564289
+              </a>
+              <a href="mailto:hoanggialongls12@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">hoanggialongls12@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 6 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-coral to-orange-400"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-orange-100 text-coral rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-coral group-hover:text-white transition-colors duration-300">
+              TL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Lưu Đức Thành Long</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 24040636</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0334035783" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0334035783
+              </a>
+              <a href="mailto:luuducthanhlong2006@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">luuducthanhlong2006@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Member 7 -->
+        <div
+          class="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1.125rem)] bg-white rounded-2xl border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden group">
+          <div class="h-2 bg-gradient-to-r from-ocean-500 to-ocean-600"></div>
+          <div class="p-6 text-center">
+            <div
+              class="w-16 h-16 mx-auto bg-ocean-100 text-ocean-600 rounded-full flex items-center justify-center text-2xl font-bold mb-4 group-hover:bg-ocean-600 group-hover:text-white transition-colors duration-300">
+              QL
+            </div>
+            <h4 class="font-bold text-gray-900 text-lg">Nguyễn Quốc Long</h4>
+            <p class="text-xs text-gray-400 mb-4">MSV: 24040640</p>
+            <div class="space-y-2 text-sm text-gray-600">
+              <a href="tel:0365892079" class="flex items-center justify-center gap-2 hover:text-ocean-600 transition">
+                <i class="fa-solid fa-phone text-ocean-500 w-4"></i> 0365892079
+              </a>
+              <a href="mailto:longnguyenquoc40@gmail.com"
+                class="flex items-center justify-center gap-2 hover:text-ocean-600 transition truncate">
+                <i class="fa-solid fa-envelope text-ocean-500 w-4"></i>
+                <span class="truncate">longnguyenquoc40@gmail.com</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FR-8: Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+        <!-- Branding -->
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <i class="fa-solid fa-water text-ocean-500 text-3xl"></i>
+            <span class="font-bold text-2xl text-white">ReefRescue</span>
+          </div>
+          <p class="text-sm text-gray-400 mb-4">
+            Dự án nâng cao nhận thức và bảo vệ rạn san hô, thực hiện bởi sinh viên Đại học Ngoại Ngữ.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="text-white font-bold text-lg mb-4">Liên Kết Nhanh</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="#about" class="hover:text-ocean-400 transition">Về dự án</a></li>
+            <li><a href="#crisis" class="hover:text-ocean-400 transition">Thực trạng</a></li>
+            <li><a href="#benefits" class="hover:text-ocean-400 transition">Lợi ích tham gia</a></li>
+            <li><a href="#education" class="hover:text-ocean-400 transition">Nội dung giáo dục</a></li>
+            <li><a href="#team" class="hover:text-ocean-400 transition">Đội ngũ dự án</a></li>
+            <li><a href="#action" class="hover:text-ocean-400 transition">Đóng góp & Hành động</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="text-sm text-gray-500">
+          &copy; 2026 Dự án Save the Coral Reefs. Thiết kế bởi Nhóm 68 ULIS.
+        </p>
+        <div class="flex gap-4">
+          <a href="https://www.facebook.com/login" target="_blank" class="text-gray-500 hover:text-white transition"><i
+              class="fa-brands fa-facebook"></i></a>
+          <a href="https://www.instagram.com/accounts/login/" target="_blank"
+            class="text-gray-500 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/login" target="_blank" class="text-gray-500 hover:text-white transition"><i
+              class="fa-brands fa-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Interactions -->
+  <script>
+    // Toggle Mobile Menu
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', () => {
+      menu.classList.toggle('hidden');
+    });
+
+    // Close mobile menu on link click
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
+
+    // Copy Hashtag function (FR-6.1)
+    function copyHashtag() {
+      const textToCopy = "#CoralChallenge #SaveTheReef #Nhom68ULIS";
+
+      // Clipboard API (theo quy tắc nghiệp vụ cho file độc lập)
+      const textArea = document.createElement("textarea");
+      textArea.value = textToCopy;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
+        const msg = document.getElementById('copy-msg');
+        msg.classList.remove('hidden');
+        setTimeout(() => msg.classList.add('hidden'), 2000);
+      } catch (err) {
+        console.error('Không thể copy', err);
+      }
+      document.body.removeChild(textArea);
+    }
+
+    // Form Submit Handler (FR-6.2)
+    function submitForm(e) {
+      e.preventDefault(); // Ngăn reload trang
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+
+      if (name && email) {
+        // Hiển thị thông báo thành công thay vì alert
+        document.getElementById('volunteer-form').classList.add('hidden');
+        document.getElementById('form-success').classList.remove('hidden');
+      }
+    }
+
+    // Initialize Chart.js (FR-4.2)
+    document.addEventListener('DOMContentLoaded', function () {
+      // Biểu đồ Nhận thức (Pie Chart)
+      const ctxAwareness = document.getElementById('awarenessChart').getContext('2d');
+      new Chart(ctxAwareness, {
+        type: 'doughnut',
+        data: {
+          labels: ['Rất hiểu rõ', 'Biết sơ qua', 'Chưa từng nghe tới'],
+          datasets: [{
+            data: [15, 60, 25],
+            backgroundColor: ['#0ea5e9', '#38bdf8', '#bae6fd'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom' }
+          },
+          cutout: '60%'
+        }
+      });
+
+      // Biểu đồ Hành động (Bar Chart)
+      const ctxAction = document.getElementById('actionChart').getContext('2d');
+      new Chart(ctxAction, {
+        type: 'bar',
+        data: {
+          labels: ['Sẵn sàng tham gia', 'Đã từng quyên góp', 'Đã tham gia dọn rác'],
+          datasets: [{
+            label: 'Tỷ lệ %',
+            data: [75, 20, 10],
+            backgroundColor: ['#ff7f50', '#fb923c', '#fdba74'],
+            borderRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: { beginAtZero: true, max: 100 }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
